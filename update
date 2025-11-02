@@ -1,0 +1,5 @@
+#! /bin/sh
+
+sudo pacman -S --needed nginx
+
+cp ./nginx.conf /etc/nginx/nginx.conf
