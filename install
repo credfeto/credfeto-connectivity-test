@@ -8,8 +8,14 @@ die() {
 
 BASEDIR="$(dirname "$(readlink -f "$0")")"
 
-sudo pacman -S --needed nginx
+sudo pacman -S --needed nginx firewalld
 
 cp "$BASEDIR/nginx.conf" /etc/nginx/nginx.conf
 
 sudo systemctl enable --now nginx
+
+sudo systemctl enable --now firewalld
+
+sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="10.0.0.0/8" port protocol="tcp" port="80" accept'
+sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="192.168.0.0/16" port protocol="tcp" port="80" accept'
+sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" source address="172.16.0.0/20" port protocol="tcp" port="80" accept'
