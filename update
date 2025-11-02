@@ -1,7 +1,13 @@
 #! /bin/sh
 
-sudo pacman -S --needed nginx
+die() {
+    echo
+    echo "$@"
+    exit 1
+}
 
-cp ./nginx.conf /etc/nginx/nginx.conf
+BASEDIR="$(dirname "$(readlink -f "$0")")"
+
+cp "$BASEDIR/nginx.conf" /etc/nginx/nginx.conf
 
 sudo systemctl reload nginx
