@@ -8,6 +8,8 @@ die() {
 
 BASEDIR="$(dirname "$(readlink -f "$0")")"
 
+cd "$BASEDIR" && git pull
+
 cp "$BASEDIR/nginx.conf" /etc/nginx/nginx.conf
 
 sudo systemctl reload nginx
